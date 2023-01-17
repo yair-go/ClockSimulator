@@ -1,0 +1,29 @@
+﻿<Window x:Class="ClockSimulator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClockSimulator"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="12*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+
+        <Button x:Name="startTimerButton" Content="Start"                  
+                Margin="10" Grid.Row="1" FontSize="42" Click="startTimerButton_Click"/>
+
+        <Button x:Name="stopTimerButton" Content="Stop" Grid.Column="1"                  
+                Margin="10" Grid.Row="1" FontSize="42" Click="stopTimerButton_Click"/>
+
+        <TextBlock x:Name="timeTextBlock"  Text="00:00:00"                     
+                   Grid.ColumnSpan="2" FontSize="96" TextAlignment="Center" 
+                   Foreground="#FF37F10E"/>
+    </Grid>
+</Window>
