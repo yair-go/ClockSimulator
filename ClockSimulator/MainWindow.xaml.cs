@@ -24,9 +24,7 @@ namespace ClockSimulator
 
     public partial class MainWindow : Window
     {
-        BackgroundWorker clockWorker;
-
-       
+        BackgroundWorker clockWorker;      
 
         DateTime display = DateTime.Now;
         private int rate = 1;
@@ -70,9 +68,11 @@ namespace ClockSimulator
 
         private void ClockWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            int sec = (int)e.Argument;
+            int sec = (int)e.Argument; // sec = 1
 
-            while (!clockWorker.CancellationPending)
+            Simulator.orderWorker.ProgressChanged += OrderWorker_ProgressChanged;
+
+            while (!clockWorker.CancellationPending) // while (true);
             {
                 Thread.Sleep(1000);
                 clockWorker.ReportProgress(sec);      
@@ -85,6 +85,13 @@ namespace ClockSimulator
             if (clockWorker.WorkerSupportsCancellation == true)
                 clockWorker.CancelAsync(); // Cancel the asynchronous operation.
             
+            Simulator.StartSimulator();
+            
+        }
+
+        private void OrderWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void stopTimerButton_Click(object sender, RoutedEventArgs e)
@@ -92,6 +99,8 @@ namespace ClockSimulator
             rate = 1;
             if (clockWorker.WorkerSupportsCancellation == true)
                 clockWorker.CancelAsync(); // Cancel the asynchronous operation.
+
+            Simulator.orderWorker.CancelAsync();
         }
     }
 }
